@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 if(name.isEmpty() && etAmount.getText().toString().isEmpty()){
                     etName.setError("Please enter an Name");
                     etAmount.setError("Please enter an amount");
-                    Toast.makeText(MainActivity.this, "Please enter a name and amount", Toast.LENGTH_SHORT).show();
                 }else {
                     int amount = Integer.parseInt(etAmount.getText().toString());
                     ShoppingItem newItem = new ShoppingItem(name, amount);

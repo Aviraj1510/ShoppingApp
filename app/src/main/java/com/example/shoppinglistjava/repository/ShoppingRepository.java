@@ -23,6 +23,10 @@ public class ShoppingRepository {
 
     }
 
+    public LiveData<List<ShoppingItem>> searchItems(String query) {
+        return userDao.searchItems("%" + query + "%");
+    }
+
     public void insert(ShoppingItem item) {
         new InsertShoppingItemAsyncTask(userDao).execute(item);
     }

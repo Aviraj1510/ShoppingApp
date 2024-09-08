@@ -7,9 +7,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,16 +30,20 @@ public class ShoppingList extends AppCompatActivity {
     private ShoppingListAdapter shoppingListAdapter;
     private RecyclerView rvShoppingList;
     private ImageView imgCart;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
 
+        searchView = findViewById(R.id.searchView);
         imgCart = findViewById(R.id.imgCart);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                 , R.anim.cart_anim);
         imgCart.startAnimation(animation);
+
+
 
 
     // Initialize RecyclerView
@@ -69,6 +75,26 @@ public class ShoppingList extends AppCompatActivity {
         });
         rvShoppingList.setAdapter(shoppingListAdapter);
 
+        //Search View
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchShoppingItems(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchShoppingItems(newText);
+                return false;
+            }
+        });
+
+
+
+
+
         // Initialize ViewModel
         shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
 
@@ -81,6 +107,16 @@ public class ShoppingList extends AppCompatActivity {
                     shoppingListAdapter.setShoppingItems(shoppingItems);
                 } else {
                     Log.d("ShoppingList", "No items received");
+                }
+            }
+        });
+    }
+    private void searchShoppingItems(String query) {
+        shoppingViewModel.searchItems(query).observe(this, new Observer<List<ShoppingItem>>() {
+            @Override
+            public void onChanged(List<ShoppingItem> shoppingItems) {
+                if (shoppingItems != null) {
+                    shoppingListAdapter.setShoppingItems(shoppingItems);
                 }
             }
         });

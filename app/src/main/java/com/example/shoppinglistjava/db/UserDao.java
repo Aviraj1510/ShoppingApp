@@ -24,4 +24,7 @@ public interface UserDao {
 
     @Query("SELECT * FROM shopping_items")
     LiveData<List<ShoppingItem>> getAllShoppingItems();
+
+    @Query("SELECT * FROM shopping_items WHERE name LIKE :query")
+    LiveData<List<ShoppingItem>> searchItems(String query);
 }

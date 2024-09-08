@@ -32,6 +32,11 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     }
 
 
+    public void filterList(List<ShoppingItem> shoppingItems){
+        this.shoppingItems = shoppingItems;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ShoppingListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

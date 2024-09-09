@@ -2,6 +2,7 @@ package com.example.shoppinglistjava;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,25 +12,48 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ShoppingViewModel shoppingViewModel;
     private EditText etName, etAmount;
     private ImageView cartSlide;
-    private Button btnList;
+
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cartSlide = findViewById(R.id.imageView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.list_home){
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    return true;
+                }
+                if (id == R.id.list_list){
+                    startActivity(new Intent(MainActivity.this, ShoppingList.class));
+                    return true;
+                }
+                if (id == R.id.list_setting){
+                    Toast.makeText(MainActivity.this, "Setting Activity Open", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
 
@@ -37,15 +61,8 @@ public class MainActivity extends AppCompatActivity {
         etAmount = findViewById(R.id.editAmount);
 
         Button btnAddItem = findViewById(R.id.buttonAdd);
-        Button btnList = findViewById(R.id.btnList);
 
-        btnList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShoppingList.class);
-                startActivity(intent);
-            }
-        });
+
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override

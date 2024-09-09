@@ -1,13 +1,18 @@
 package com.example.shoppinglistjava;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -20,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoppinglistjava.Adapter.ShoppingListAdapter;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -31,6 +37,8 @@ public class ShoppingList extends AppCompatActivity {
     private RecyclerView rvShoppingList;
     private ImageView imgCart;
     private SearchView searchView;
+    private ImageButton imageButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,17 @@ public class ShoppingList extends AppCompatActivity {
 
         searchView = findViewById(R.id.searchView);
         imgCart = findViewById(R.id.imgCart);
+        imageButton = findViewById(R.id.btnBack);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShoppingList.this, MainActivity.class));
+                finish();
+            }
+        });
+
+
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                 , R.anim.cart_anim);
         imgCart.startAnimation(animation);

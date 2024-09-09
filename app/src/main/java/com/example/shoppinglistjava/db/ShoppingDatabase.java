@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 
 
-@Database(entities = {ShoppingItem.class}, version = 1)
+@Database(entities = {ShoppingItem.class}, version = 3)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
 

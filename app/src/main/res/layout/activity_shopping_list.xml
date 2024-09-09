@@ -65,12 +65,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchViewCard">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="#FF6D00"
+                android:textAlignment="center"
+                android:textSize="19dp"
+                android:text="Item Name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textColor="#FF6D00"
+                android:textAlignment="center"
+                android:textSize="19dp"
+                android:text="Total Rupees"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="19dp"
+                android:textColor="#FF6D00"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:text="Quantity"/>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvShoppingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+            android:padding="3dp"
             tools:layout_editor_absoluteY="101dp" />
 
         <ImageView

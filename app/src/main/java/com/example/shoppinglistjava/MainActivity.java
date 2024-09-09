@@ -23,7 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private ShoppingViewModel shoppingViewModel;
-    private EditText etName, etAmount;
+    private EditText etName, etAmount, etRupee;
     private ImageView cartSlide;
 
     private BottomNavigationView bottomNavigationView;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         etName = findViewById(R.id.editTextName);
         etAmount = findViewById(R.id.editAmount);
+        etRupee = findViewById(R.id.editRupees);
 
         Button btnAddItem = findViewById(R.id.buttonAdd);
 
@@ -69,19 +70,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = etName.getText().toString();
 
-
-
                 if(name.isEmpty() && etAmount.getText().toString().isEmpty()){
                     etName.setError("Please enter an Name");
-                    etAmount.setError("Please enter an amount");
+                    etAmount.setError("Please enter an Quantity");
+                    etRupee.setError("Please enter Per Item/Kg Value");
                 }else {
                     int amount = Integer.parseInt(etAmount.getText().toString());
-                    ShoppingItem newItem = new ShoppingItem(name, amount);
+                    double rupee = Double.parseDouble(etRupee.getText().toString());
+
+
+
+                    ShoppingItem newItem = new ShoppingItem(name, amount, rupee);
                     shoppingViewModel.insert(newItem);
                     etName.setText("");
                     etAmount.setText("");
+                    etRupee.setText("");
                     etAmount.onEditorAction(EditorInfo.IME_ACTION_DONE);
-
+                    etRupee.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                             , R.anim.cart_anim);

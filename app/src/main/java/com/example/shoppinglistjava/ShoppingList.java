@@ -91,6 +91,13 @@ public class ShoppingList extends AppCompatActivity {
                     shoppingViewModel.update(item);
                 }
             }
+
+            @Override
+            public void onTotleRupee(ShoppingItem item) {
+               double Totle =  item.getRupees() * item.getAmount();
+               item.setTotalrupees(Totle);
+               shoppingViewModel.update(item);
+            }
         });
         rvShoppingList.setAdapter(shoppingListAdapter);
 

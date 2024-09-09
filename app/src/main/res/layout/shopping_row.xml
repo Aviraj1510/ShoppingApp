@@ -13,10 +13,17 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@drawable/backgroundrow"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:weightSum="3"
     android:padding="16dp">
 <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="left"
+    android:layout_marginRight="10dp"
+    android:layout_weight="1"
     android:orientation="vertical">
     <TextView
         android:id="@+id/tvName"
@@ -34,37 +41,72 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_delete"
-        android:padding="5dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
-        android:layout_gravity="left"
         />
 
 
 
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="left"
+        android:layout_weight="1"
+        android:layout_marginLeft="0dp"
+        >
+        <TextView
+            android:id="@+id/tvRupee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rupees"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/Rupee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Click Here"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="13dp"
+            android:textSize="20sp"
+            />
+
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="left"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Amount"
-            android:layout_marginRight="15dp"
+            android:layout_gravity="left"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="left"
             android:orientation="horizontal">
 
             <ImageView
@@ -74,21 +116,16 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_minus"
-                android:padding="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="right"
                 android:textSize="20sp"
+                android:layout_marginEnd="10dp"
                  />
             <ImageView
                 android:id="@+id/ivPlus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:padding="3dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_plus"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="right"
                 />
         </LinearLayout>
     </LinearLayout>

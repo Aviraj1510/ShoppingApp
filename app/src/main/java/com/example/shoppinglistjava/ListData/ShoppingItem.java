@@ -11,10 +11,30 @@ public class ShoppingItem {
     private int id;
     private String name;
     private int amount;
+    private double rupees;
+    private double totalrupees;
 
-    public ShoppingItem(String name, int amount) {
+    public ShoppingItem(String name, int amount, double rupees) {
         this.name = name;
         this.amount = amount;
+        this.rupees = rupees;
+        this.totalrupees = rupees * amount;
+    }
+
+    public double getTotalrupees() {
+        return totalrupees;
+    }
+
+    public void setTotalrupees(double totalrupees) {
+        this.totalrupees = totalrupees;
+    }
+
+    public double getRupees() {
+        return rupees;
+    }
+
+    public void setRupees(double rupees) {
+        this.rupees = rupees;
     }
 
     public String getName() {

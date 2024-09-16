@@ -82,7 +82,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvName, tvAmount, tvRupee, Rupee, PPRs;
+        TextView tvName, tvAmount, tvRupee, PPRs, type;
         ImageView ivDelete,ivPlus, ivMinus;
 
         public ViewHolder(@NonNull View itemView) {
@@ -93,8 +93,8 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             ivPlus = itemView.findViewById(R.id.ivPlus);
             ivMinus = itemView.findViewById(R.id.ivMinus);
             tvRupee = itemView.findViewById(R.id.tvRupee);
-            Rupee = itemView.findViewById(R.id.Rupee);
             PPRs = itemView.findViewById(R.id.perproductrupee);
+            type = itemView.findViewById(R.id.type);
 
         }
 
@@ -103,11 +103,11 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             tvAmount.setText(String.valueOf(item.getAmount()));
             tvRupee.setText(String.valueOf(item.getTotalrupees()));
             PPRs.setText(String.valueOf(item.getRupees()));
+            type.setText(item.getProductType());
 
             ivDelete.setOnClickListener(v -> listener.onDeleteClick(item));
             ivPlus.setOnClickListener(v -> listener.onPlusClick(item));
             ivMinus.setOnClickListener(v -> listener.onMinusClick(item));
-            Rupee.setOnClickListener(v -> listener.onTotleRupee(item));
 
         }
     }

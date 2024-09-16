@@ -11,6 +11,15 @@
     android:weightSum="3"
     tools:context=".ShoppingList">
 
+    <Button
+        android:id="@+id/saveList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="60dp"
@@ -104,10 +113,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="50dp"
+            tools:listitem="@layout/shopping_row"
             android:padding="3dp"
             tools:layout_editor_absoluteY="101dp" />
-
         <ImageView
             android:id="@+id/imgCart"
             android:layout_width="132dp"

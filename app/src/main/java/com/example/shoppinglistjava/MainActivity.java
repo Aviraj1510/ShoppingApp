@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +37,17 @@ public class MainActivity extends AppCompatActivity {
         cartSlide = findViewById(R.id.imageView);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+        String[] ProductType = getResources().getStringArray(R.array.Product_Type);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this,
+                R.layout.dropdown_item,
+                ProductType
+        );
+        AutoCompleteTextView autocompleteTV = findViewById(R.id.autoCompleteTextView);
+        autocompleteTV.setAdapter(arrayAdapter);
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -47,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(MainActivity.this, ShoppingList.class));
                     return true;
                 }
-                if (id == R.id.list_setting){
-                    Toast.makeText(MainActivity.this, "Setting Activity Open", Toast.LENGTH_SHORT).show();
+                if (id == R.id.Lists){
                     return true;
                 }
                 return false;
@@ -69,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString();
+                String productType = autocompleteTV.getText().toString();
+
 
                 if(name.isEmpty() && etAmount.getText().toString().isEmpty()){
                     etName.setError("Please enter an Name");
@@ -80,11 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    ShoppingItem newItem = new ShoppingItem(name, amount, rupee);
+                    ShoppingItem newItem = new ShoppingItem(name, amount, rupee, productType);
                     shoppingViewModel.insert(newItem);
                     etName.setText("");
                     etAmount.setText("");
                     etRupee.setText("");
+                    autocompleteTV.setText("");
                     etAmount.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     etRupee.onEditorAction(EditorInfo.IME_ACTION_DONE);
 

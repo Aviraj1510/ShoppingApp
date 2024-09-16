@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,14 @@ import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -38,6 +48,8 @@ public class ShoppingList extends AppCompatActivity {
     private ImageView imgCart;
     private SearchView searchView;
     private ImageButton imageButton;
+    private Button saveBtn;
+
 
 
     @Override
@@ -48,6 +60,7 @@ public class ShoppingList extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         imgCart = findViewById(R.id.imgCart);
         imageButton = findViewById(R.id.btnBack);
+        saveBtn = findViewById(R.id.saveList);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +69,8 @@ public class ShoppingList extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
@@ -70,6 +85,16 @@ public class ShoppingList extends AppCompatActivity {
         rvShoppingList.setLayoutManager(new LinearLayoutManager(this));
 
 
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               saveShoppingListToFile();
+               saveShoppingListToExcel();
+            }
+        });
+
+
+
         shoppingListAdapter = new ShoppingListAdapter(new ShoppingListAdapter.OnItemClickListener(){
 
 
@@ -82,6 +107,7 @@ public class ShoppingList extends AppCompatActivity {
             public void onPlusClick(ShoppingItem item) {
                 item.setAmount(item.getAmount() + 1);
                 shoppingViewModel.update(item);
+                onTotleRupee(item);
             }
 
             @Override
@@ -89,6 +115,7 @@ public class ShoppingList extends AppCompatActivity {
                 if (item.getAmount() > 1) {
                     item.setAmount(item.getAmount() - 1);
                     shoppingViewModel.update(item);
+                    onTotleRupee(item);
                 }
             }
 
@@ -147,4 +174,78 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
     }
+
+    private void saveShoppingListToFile() {
+        shoppingViewModel.getAllShoppingItems().observe(this, new Observer<List<ShoppingItem>>() {
+            @Override
+            public void onChanged(List<ShoppingItem> shoppingItems) {
+                if (shoppingItems != null && !shoppingItems.isEmpty()) {
+                    StringBuilder data = new StringBuilder();
+
+                    for (ShoppingItem item : shoppingItems) {
+                        data.append("Item: ").append(item.getName())
+                                .append(", Price: ").append(item.getRupees())
+                                .append(", Quantity: ").append(item.getAmount())
+                                .append(", Total: ").append(item.getTotalrupees())
+                                .append("\n");
+                    }
+
+                    // Save to file in app-specific directory
+                    File file = new File(getExternalFilesDir(null), "shopping_list.txt");
+                    try (FileOutputStream fos = new FileOutputStream(file)) {
+                        fos.write(data.toString().getBytes());
+                        Toast.makeText(ShoppingList.this, "File saved to " + file.getPath(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ShoppingList.this, "Failed to save file", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ShoppingList.this, "No shopping items to save", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    private void saveShoppingListToExcel() {
+        shoppingViewModel.getAllShoppingItems().observe(this, new Observer<List<ShoppingItem>>() {
+            @Override
+            public void onChanged(List<ShoppingItem> shoppingItems) {
+                if (shoppingItems != null && !shoppingItems.isEmpty()) {
+                    HSSFWorkbook workbook = new HSSFWorkbook();
+                    HSSFSheet sheet = workbook.createSheet("Shopping List");
+
+                    // Create header row
+                    HSSFRow headerRow = sheet.createRow(0);
+                    headerRow.createCell(0).setCellValue("Item Name");
+                    headerRow.createCell(1).setCellValue("Price");
+                    headerRow.createCell(2).setCellValue("Quantity");
+                    headerRow.createCell(3).setCellValue("Total");
+
+                    // Add shopping items to the Excel sheet
+                    int rowNum = 1;
+                    for (ShoppingItem item : shoppingItems) {
+                        HSSFRow row = sheet.createRow(rowNum++);
+                        row.createCell(0).setCellValue(item.getName());
+                        row.createCell(1).setCellValue(item.getRupees());
+                        row.createCell(2).setCellValue(item.getAmount());
+                        row.createCell(3).setCellValue(item.getTotalrupees());
+                    }
+
+                    // Save the file
+                    File file = new File(getExternalFilesDir(null), "shopping_list.xls");
+                    try (FileOutputStream fos = new FileOutputStream(file)) {
+                        workbook.write(fos);
+                        Toast.makeText(ShoppingList.this, "Excel file saved to " + file.getPath(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ShoppingList.this, "Failed to save Excel file", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ShoppingList.this, "No shopping items to save", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }

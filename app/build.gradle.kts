@@ -48,4 +48,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("org.apache.poi:poi:5.0.0")
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+
 }

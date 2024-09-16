@@ -12,13 +12,23 @@ public class ShoppingItem {
     private String name;
     private int amount;
     private double rupees;
+    private String productType;
     private double totalrupees;
 
-    public ShoppingItem(String name, int amount, double rupees) {
+    public ShoppingItem(String name, int amount, double rupees, String productType) {
         this.name = name;
         this.amount = amount;
         this.rupees = rupees;
+        this.productType = productType;
         this.totalrupees = rupees * amount;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
     }
 
     public double getTotalrupees() {

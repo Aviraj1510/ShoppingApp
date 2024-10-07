@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         cartSlide = findViewById(R.id.imageView);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        Button btnAddItem = findViewById(R.id.buttonAdd);
 
         String[] ProductType = getResources().getStringArray(R.array.Product_Type);
 
@@ -73,10 +74,7 @@ public class MainActivity extends AppCompatActivity {
         etAmount = findViewById(R.id.editAmount);
         etRupee = findViewById(R.id.editRupees);
 
-        Button btnAddItem = findViewById(R.id.buttonAdd);
-
-
-
+//Button Click
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     autocompleteTV.setText("");
                     etAmount.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     etRupee.onEditorAction(EditorInfo.IME_ACTION_DONE);
-
+                    autocompleteTV.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                             , R.anim.cart_anim);
                     cartSlide.startAnimation(animation);

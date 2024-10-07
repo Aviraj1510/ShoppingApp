@@ -1,20 +1,19 @@
 package com.example.shoppinglistjava.repository;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.db.ShoppingDatabase;
-import com.example.shoppinglistjava.db.UserDao;
+import com.example.shoppinglistjava.db.ShoppingItemDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ShoppingRepository {
-    private UserDao userDao;
+    private ShoppingItemDao shoppingItemDao;
     private LiveData<List<ShoppingItem>> allShoppingItems;
     private ExecutorService executorService;
 
@@ -22,18 +21,18 @@ public class ShoppingRepository {
 
     public ShoppingRepository(Application application) {
         ShoppingDatabase database = ShoppingDatabase.getInstance(application);
-        userDao = database.userDao();
-        allShoppingItems = userDao.getAllShoppingItems();
+        shoppingItemDao = database.userDao();
+        allShoppingItems = shoppingItemDao.getAllShoppingItems();
         executorService = Executors.newSingleThreadExecutor();
     }
 
     public LiveData<List<ShoppingItem>> searchItems(String query) {
-        return userDao.searchItems("%" + query + "%");
+        return shoppingItemDao.searchItems("%" + query + "%");
     }
 
     public void insert(ShoppingItem item) {
 //        new InsertShoppingItemAsyncTask(userDao).execute(item);
-        executorService.execute(() -> userDao.insert(item));
+        executorService.execute(() -> shoppingItemDao.insert(item));
     }
     public LiveData<List<ShoppingItem>> getAllShoppingItems() {
         return allShoppingItems;
@@ -41,12 +40,12 @@ public class ShoppingRepository {
 
     public void update(ShoppingItem item) {
 //        new UpdateShoppingItemAsyncTask(userDao).execute(item);
-        executorService.execute(() -> userDao.update(item));
+        executorService.execute(() -> shoppingItemDao.update(item));
     }
 
     public void delete(ShoppingItem item) {
 //        new DeleteShoppingItemAsyncTask(userDao).execute(item);
-        executorService.execute(() -> userDao.delete(item));
+        executorService.execute(() -> shoppingItemDao.delete(item));
     }
 
 //    // AsyncTask for updating

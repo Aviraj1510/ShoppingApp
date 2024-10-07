@@ -9,12 +9,13 @@ import androidx.room.RoomDatabase;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 
 
-@Database(entities = {ShoppingItem.class}, version = 4)
+@Database(entities = {ShoppingItem.class}, version = 5)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
 
     private static ShoppingDatabase instance;
-    public abstract UserDao userDao();
+    public abstract ShoppingItemDao userDao();
+
 
     public static synchronized ShoppingDatabase getInstance(Context context) {
         if (instance == null) {

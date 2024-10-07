@@ -114,7 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="50dp"
-            tools:listitem="@layout/shopping_row"
             android:padding="3dp"
             tools:layout_editor_absoluteY="101dp" />
         <ImageView

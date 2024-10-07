@@ -2,6 +2,8 @@ package com.example.shoppinglistjava.ListData;
 
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "shopping_items")
@@ -14,6 +16,7 @@ public class ShoppingItem {
     private double rupees;
     private String productType;
     private double totalrupees;
+    private long categoryId;
 
     public ShoppingItem(String name, int amount, double rupees, String productType) {
         this.name = name;
@@ -21,6 +24,24 @@ public class ShoppingItem {
         this.rupees = rupees;
         this.productType = productType;
         this.totalrupees = rupees * amount;
+    }
+
+    @Ignore
+    public ShoppingItem(long categoryId, double totalrupees, String productType, double rupees, int amount, String name) {
+        this.categoryId = categoryId;
+        this.totalrupees = totalrupees;
+        this.productType = productType;
+        this.rupees = rupees;
+        this.amount = amount;
+        this.name = name;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getProductType() {

@@ -12,7 +12,7 @@ import com.example.shoppinglistjava.ListData.ShoppingItem;
 import java.util.List;
 
 @Dao
-public interface UserDao {
+public interface ShoppingItemDao {
     @Insert
     void insert(ShoppingItem item);
 
@@ -27,4 +27,5 @@ public interface UserDao {
 
     @Query("SELECT * FROM shopping_items WHERE name LIKE :query")
     LiveData<List<ShoppingItem>> searchItems(String query);
+
 }

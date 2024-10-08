@@ -7,6 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "shopping_items")
+
 public class ShoppingItem {
 
     @PrimaryKey(autoGenerate = true)

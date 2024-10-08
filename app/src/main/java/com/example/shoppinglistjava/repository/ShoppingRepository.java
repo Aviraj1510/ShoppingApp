@@ -21,7 +21,7 @@ public class ShoppingRepository {
 
     public ShoppingRepository(Application application) {
         ShoppingDatabase database = ShoppingDatabase.getInstance(application);
-        shoppingItemDao = database.userDao();
+        shoppingItemDao = database.shoppingItemDao();
         allShoppingItems = shoppingItemDao.getAllShoppingItems();
         executorService = Executors.newSingleThreadExecutor();
     }
@@ -31,7 +31,6 @@ public class ShoppingRepository {
     }
 
     public void insert(ShoppingItem item) {
-//        new InsertShoppingItemAsyncTask(userDao).execute(item);
         executorService.execute(() -> shoppingItemDao.insert(item));
     }
     public LiveData<List<ShoppingItem>> getAllShoppingItems() {
@@ -39,57 +38,11 @@ public class ShoppingRepository {
     }
 
     public void update(ShoppingItem item) {
-//        new UpdateShoppingItemAsyncTask(userDao).execute(item);
         executorService.execute(() -> shoppingItemDao.update(item));
     }
 
     public void delete(ShoppingItem item) {
-//        new DeleteShoppingItemAsyncTask(userDao).execute(item);
         executorService.execute(() -> shoppingItemDao.delete(item));
     }
 
-//    // AsyncTask for updating
-//    private static class UpdateShoppingItemAsyncTask extends AsyncTask<ShoppingItem, Void, Void> {
-//        private UserDao userDao;
-//
-//        private UpdateShoppingItemAsyncTask(UserDao userDao) {
-//            this.userDao = userDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(ShoppingItem... shoppingItems) {
-//            userDao.update(shoppingItems[0]);
-//            return null;
-//        }
-//    }
-//
-//    // AsyncTask for deleting
-//    private static class DeleteShoppingItemAsyncTask extends AsyncTask<ShoppingItem, Void, Void> {
-//        private UserDao userDao;
-//
-//        private DeleteShoppingItemAsyncTask(UserDao userDao) {
-//            this.userDao = userDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(ShoppingItem... shoppingItems) {
-//            userDao.delete(shoppingItems[0]);
-//            return null;
-//        }
-//    }
-//
-//    private static class InsertShoppingItemAsyncTask extends AsyncTask<ShoppingItem, Void, Void> {
-//        private UserDao userDao;
-//
-//        private InsertShoppingItemAsyncTask(UserDao userDao) {
-//            this.userDao = userDao;
-//        }
-//
-//
-//        @Override
-//        protected Void doInBackground(ShoppingItem... shoppingItems) {
-//            userDao.insert(shoppingItems[0]);
-//            return null;
-//        }
-//    }
 }

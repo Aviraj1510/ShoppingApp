@@ -5,52 +5,40 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    tools:context=".MainActivity"
-    >
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:src="@drawable/grocery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ShoppingListActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Shopping Bag"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Add Shopping List For Category"
         android:textAlignment="center"
-        android:textColor="#FF6D00"
-        android:textSize="29dp"
+        android:textColor="#6200EA"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingRight="50dp"
-        android:paddingLeft="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <EditText
-            android:id="@+id/editTextName"
-            android:layout_width="match_parent"
+            android:id="@+id/editCListName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background"
             android:hint="Name"
             android:paddingLeft="20dp"
@@ -64,104 +52,109 @@
             tools:layout_editor_absoluteY="273dp" />
 
         <EditText
-            android:id="@+id/editAmount"
-            android:layout_width="match_parent"
+            android:id="@+id/editCListQuantity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background"
             android:hint="Quantity"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:inputType="number"
+            android:textColor="#A66D6D"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="273dp" />
+
+        <EditText
+            android:id="@+id/editCListRupee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Rupee"
             android:inputType="numberDecimal"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:textColor="#FF6D00"
-            app:layout_constraintEnd_toEndOf="@+id/editTextName"
-            app:layout_constraintStart_toStartOf="@+id/editTextName"
-            app:layout_constraintTop_toBottomOf="@+id/editTextName" />
-
-
-        <EditText
-            android:id="@+id/editRupees"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edittext_background"
-            android:hint="Per item Rs."
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/editAmount"
+            android:textColor="#A66D6D"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editAmount"
-            app:layout_constraintTop_toBottomOf="@+id/editAmount" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="273dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editRupees">
 
             <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
+                android:id="@+id/autoCompleteTextViewCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edittext_background"
                 android:inputType="none"
                 android:text="Choose type" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="match_parent"
+            android:id="@+id/buttonAddCategoryList"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
+            android:layout_gravity="top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="#FF6D00"
             android:text="Add"
             android:textColor="#661602"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
             app:layout_constraintStart_toStartOf="@+id/textInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listCategory"
         android:layout_width="match_parent"
-        android:layout_height="129dp"
-        android:src="@drawable/stock_vector_people_visiting_supermarket_for_buying_grocery_happy_men_and_women_choosing_products_in_store_1951850335"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/botto_nav_menu" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="132dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/cart_removebg_preview"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

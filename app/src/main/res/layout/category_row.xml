@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:background="@drawable/backgroundrow">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+    <TextView
+        android:id="@+id/categoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:text="Category"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+
+        <ImageView
+            android:id="@+id/categoryDelete"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_weight="1"
+            android:layout_gravity="center|top"
+            android:src="@drawable/ic_delete"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

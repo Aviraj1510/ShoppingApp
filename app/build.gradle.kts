@@ -38,8 +38,8 @@ dependencies {
     annotationProcessor ("androidx.room:room-compiler:2.6.1")
 
     // ViewModel & LiveData
-    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.8.5")
-    implementation ("androidx.lifecycle:lifecycle-livedata:2.8.5")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.8.6")
+    implementation ("androidx.lifecycle:lifecycle-livedata:2.8.6")
 
     implementation(libs.appcompat)
     implementation(libs.material)

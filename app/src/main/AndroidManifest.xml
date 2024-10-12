@@ -14,15 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingListJava"
         tools:targetApi="31">
-        <activity android:name=".ListsActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".ShoppingListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListsActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ShoppingList"
             android:exported="false" />
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

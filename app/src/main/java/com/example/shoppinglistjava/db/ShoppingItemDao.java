@@ -28,6 +28,4 @@ public interface ShoppingItemDao {
     @Query("SELECT * FROM shopping_items WHERE name LIKE :query")
     LiveData<List<ShoppingItem>> searchItems(String query);
 
-    @Query("SELECT * FROM shopping_items WHERE categoryId = :categoryId ORDER BY name ASC")
-    LiveData<List<ShoppingItem>> getItemsByCategory(long categoryId);
 }

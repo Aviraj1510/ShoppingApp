@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.shoppinglistjava.ListData.Category;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         cartSlide = findViewById(R.id.imageView);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         Button btnAddItem = findViewById(R.id.buttonAdd);
+
+
 
         String[] ProductType = getResources().getStringArray(R.array.Product_Type);
 
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 if (id == R.id.Lists){
+                    startActivity(new Intent(MainActivity.this, ListsActivity.class));
                     return true;
                 }
                 return false;
@@ -82,15 +86,24 @@ public class MainActivity extends AppCompatActivity {
                 String productType = autocompleteTV.getText().toString();
 
 
-                if(name.isEmpty() && etAmount.getText().toString().isEmpty()){
+                if(name.isEmpty() && etAmount.getText().toString().isEmpty() && etRupee.getText().toString().isEmpty() && productType.isEmpty()){
                     etName.setError("Please enter an Name");
                     etAmount.setError("Please enter an Quantity");
                     etRupee.setError("Please enter Per Item/Kg Value");
-                }else {
+                    autocompleteTV.setError("Please Select Type Of Product");
+
+                } else if (name.isEmpty()) {
+                    etName.setError("Please enter an Name");
+                } else if (etAmount.getText().toString().isEmpty()) {
+                    etAmount.setError("Please enter an Quantity");
+                } else if (etRupee.getText().toString().isEmpty()) {
+                    etRupee.setError("Please enter Per Item/Kg Value");
+                } else if (productType.isEmpty()) {
+                    autocompleteTV.setError("Please Select Type Of Product");
+                } else {
+
                     int amount = Integer.parseInt(etAmount.getText().toString());
                     double rupee = Double.parseDouble(etRupee.getText().toString());
-
-
 
                     ShoppingItem newItem = new ShoppingItem(name, amount, rupee, productType);
                     shoppingViewModel.insert(newItem);
@@ -100,7 +113,10 @@ public class MainActivity extends AppCompatActivity {
                     autocompleteTV.setText("");
                     etAmount.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     etRupee.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
+
                     autocompleteTV.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
                     Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                             , R.anim.cart_anim);
                     cartSlide.startAnimation(animation);
@@ -110,5 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 }

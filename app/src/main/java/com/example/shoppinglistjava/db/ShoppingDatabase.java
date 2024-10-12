@@ -7,15 +7,21 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
+import com.example.shoppinglistjava.ListData.Category;
+import com.example.shoppinglistjava.ListData.ShoppingCList;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 
+import java.util.Locale;
 
-@Database(entities = {ShoppingItem.class}, version = 2)
+
+@Database(entities = {ShoppingItem.class, Category.class, ShoppingCList.class}, version = 10)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
 
     private static ShoppingDatabase instance;
     public abstract ShoppingItemDao shoppingItemDao();
+    public abstract CategoryDao categoryDao();
+    public abstract ShoppingCItemDao shoppingCItemDao();
 
 
     public static synchronized ShoppingDatabase getInstance(Context context) {

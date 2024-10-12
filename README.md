@@ -1,4 +1,4 @@
-![Screenshot_20241012_170615](https://github.com/user-attachments/assets/a31824af-3a88-4e57-9801-e141ca50d689)ScreenShots
+ScreenShots
 
 ![Screenshot_20240916_163635](https://github.com/user-attachments/assets/fd4c6e75-0697-41d9-99e0-bfc4b9e64169)
 ![Screenshot_20240916_163719](https://github.com/user-attachments/assets/cd7e9c1e-ce32-4d77-8dae-8c49f6bcfa28)

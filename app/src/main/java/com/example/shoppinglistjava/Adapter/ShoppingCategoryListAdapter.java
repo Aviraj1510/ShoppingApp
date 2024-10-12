@@ -20,8 +20,7 @@ import java.util.List;
 
 public class ShoppingCategoryListAdapter extends RecyclerView.Adapter<ShoppingCategoryListAdapter.ViewHolder> {
 
-    private static final int VIEW_TYPE_HEADER = 0;
-    private static final int VIEW_TYPE_ITEM = 1;
+
 
 
     private List<ShoppingCList> shoppingCLists = new ArrayList<>();
@@ -45,7 +44,7 @@ public class ShoppingCategoryListAdapter extends RecyclerView.Adapter<ShoppingCa
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_category_row, parent, false);
         return new ViewHolder(itemView);
     }
 

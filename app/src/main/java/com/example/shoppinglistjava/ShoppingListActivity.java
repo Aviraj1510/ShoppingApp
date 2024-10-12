@@ -106,9 +106,9 @@ public class ShoppingListActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(itemName) && !TextUtils.isEmpty(quantityStr) && !TextUtils.isEmpty(rupeeStr) && categoryId != -1) {
                     int itemQuantity = Integer.parseInt(quantityStr);
                     double itemRupee = Double.parseDouble(rupeeStr); // Use Double here
-
+                    double totalRupee = itemQuantity * itemRupee;
                     // Create a new ShoppingItem with the categoryId
-                    ShoppingCList shoppingItem = new ShoppingCList(itemName, itemQuantity, itemRupee, "", 0.0, categoryId);
+                    ShoppingCList shoppingItem = new ShoppingCList(itemName, itemQuantity, itemRupee, "", totalRupee, categoryId);
                     shoppingCategoryItemViewModel.insert(shoppingItem);
 
                     // Clear input fields after adding

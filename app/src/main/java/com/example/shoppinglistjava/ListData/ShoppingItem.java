@@ -2,7 +2,7 @@ package com.example.shoppinglistjava.ListData;
 
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
+
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 

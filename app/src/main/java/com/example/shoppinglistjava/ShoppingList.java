@@ -1,5 +1,6 @@
 package com.example.shoppinglistjava;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -88,8 +89,7 @@ public class ShoppingList extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               saveShoppingListToFile();
-               saveShoppingListToExcel();
+                confirmBillGeneration();
             }
         });
 
@@ -180,24 +180,16 @@ public class ShoppingList extends AppCompatActivity {
             @Override
             public void onChanged(List<ShoppingItem> shoppingItems) {
                 if (shoppingItems != null && !shoppingItems.isEmpty()) {
-                    StringBuilder data = new StringBuilder();
+                    String billData = generateBill(shoppingItems);
 
-                    for (ShoppingItem item : shoppingItems) {
-                        data.append("Item: ").append(item.getName())
-                                .append(", Price: ").append(item.getRupees())
-                                .append(", Quantity: ").append(item.getAmount())
-                                .append(", Total: ").append(item.getTotalrupees())
-                                .append("\n");
-                    }
-
-                    // Save to file in app-specific directory
-                    File file = new File(getExternalFilesDir(null), "shopping_list.txt");
+                    // Save to file
+                    File file = new File(getExternalFilesDir(null), "shopping_bill.txt");
                     try (FileOutputStream fos = new FileOutputStream(file)) {
-                        fos.write(data.toString().getBytes());
-                        Toast.makeText(ShoppingList.this, "File saved to " + file.getPath(), Toast.LENGTH_SHORT).show();
+                        fos.write(billData.getBytes());
+                        Toast.makeText(ShoppingList.this, "Bill saved to " + file.getPath(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(ShoppingList.this, "Failed to save file", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShoppingList.this, "Failed to save bill", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ShoppingList.this, "No shopping items to save", Toast.LENGTH_SHORT).show();
@@ -205,6 +197,7 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
     }
+
 
 
     private void saveShoppingListToExcel() {
@@ -247,5 +240,39 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
     }
+
+
+    private String generateBill(List<ShoppingItem> shoppingItems) {
+        StringBuilder bill = new StringBuilder();
+        bill.append("🛒 Shopping Bill\n");
+        bill.append("============================\n");
+
+        double grandTotal = 0;
+
+        for (ShoppingItem item : shoppingItems) {
+            double itemTotal = item.getRupees() * item.getAmount();
+            bill.append("Item: ").append(item.getName())
+                    .append("\nQty: ").append(item.getAmount())
+                    .append(" x ₹").append(item.getRupees())
+                    .append("\nTotal: ₹").append(itemTotal)
+                    .append("\n----------------------------\n");
+            grandTotal += itemTotal;
+        }
+
+        bill.append("\nGRAND TOTAL: ₹").append(grandTotal).append("\n");
+        bill.append("============================\n");
+        bill.append("Thank you for shopping with us! 🛍️\n");
+
+        return bill.toString();
+    }
+    private void confirmBillGeneration() {
+        new AlertDialog.Builder(this)
+                .setTitle("Generate Bill")
+                .setMessage("Do you want to generate the bill?")
+                .setPositiveButton("Yes", (dialog, which) -> saveShoppingListToFile())
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
 
 }

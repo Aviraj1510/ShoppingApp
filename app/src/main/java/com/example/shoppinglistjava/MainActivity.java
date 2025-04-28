@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -46,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.list_home) {
-                    startActivity(new Intent(MainActivity.this, MainActivity.class));
                     return true;
                 } else if (id == R.id.list_list) {
                     startActivity(new Intent(MainActivity.this, ShoppingList.class));
+                    finish();
                     return true;
                 } else if (id == R.id.Lists) {
                     startActivity(new Intent(MainActivity.this, ListsActivity.class));
+                    finish();
                     return true;
                 }
                 return false;
@@ -80,21 +82,27 @@ public class MainActivity extends AppCompatActivity {
         EditText etName = dialogView.findViewById(R.id.editTextName);
         EditText etAmount = dialogView.findViewById(R.id.editAmount);
         EditText etRupee = dialogView.findViewById(R.id.editRupees);
+        Button buttonAdd = dialogView.findViewById(R.id.buttonAdd); // Custom button in layout
         AutoCompleteTextView autoCompleteTextView = dialogView.findViewById(R.id.autoCompleteTextView);
 
         String[] ProductType = getResources().getStringArray(R.array.Product_Type);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_item, ProductType);
         autoCompleteTextView.setAdapter(arrayAdapter);
 
-        builder.setPositiveButton("Add", (dialog, which) -> {
-            String name = etName.getText().toString();
-            String productType = autoCompleteTextView.getText().toString();
+        AlertDialog dialog = builder.create();
+        dialog.show(); // Show dialog first before setting button click listener
 
-            if (name.isEmpty() || etAmount.getText().toString().isEmpty() || etRupee.getText().toString().isEmpty() || productType.isEmpty()) {
+        buttonAdd.setOnClickListener(v -> {
+            String name = etName.getText().toString().trim();
+            String productType = autoCompleteTextView.getText().toString().trim();
+            String amountStr = etAmount.getText().toString().trim();
+            String rupeeStr = etRupee.getText().toString().trim();
+
+            if (name.isEmpty() || amountStr.isEmpty() || rupeeStr.isEmpty() || productType.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             } else {
-                int amount = Integer.parseInt(etAmount.getText().toString());
-                double rupee = Double.parseDouble(etRupee.getText().toString());
+                int amount = Integer.parseInt(amountStr);
+                double rupee = Double.parseDouble(rupeeStr);
 
                 ShoppingItem newItem = new ShoppingItem(name, amount, rupee, productType);
                 shoppingViewModel.insert(newItem);
@@ -102,12 +110,15 @@ public class MainActivity extends AppCompatActivity {
                 Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cart_anim);
                 cartSlide.startAnimation(animation);
                 cartSlide.setVisibility(View.VISIBLE);
+
+                dialog.dismiss(); // Close dialog after adding
             }
         });
+    }
 
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

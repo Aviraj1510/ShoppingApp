@@ -74,6 +74,7 @@ public class ShoppingList extends AppCompatActivity {
 
 
 
+
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
                 , R.anim.cart_anim);
         imgCart.startAnimation(animation);
@@ -274,5 +275,10 @@ public class ShoppingList extends AppCompatActivity {
                 .show();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ShoppingList.this, MainActivity.class));
+        finish();
+    }
 }

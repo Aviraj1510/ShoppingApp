@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -43,7 +45,11 @@ public class ShoppingListActivity extends AppCompatActivity {
         btnAddCList = findViewById(R.id.buttonAddCategoryList);
         edtCListQuantity = findViewById(R.id.editCListQuantity);
         edtCListRupee = findViewById(R.id.editCListRupee);
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.autoCompleteTextViewCategory);
 
+        String[] ProductType = getResources().getStringArray(R.array.Product_Type);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.dropdown_item, ProductType);
+        autoCompleteTextView.setAdapter(arrayAdapter);
 
         recyclerView = findViewById(R.id.listCategory);
 
@@ -122,5 +128,12 @@ public class ShoppingListActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ShoppingListActivity.this, ListsActivity.class));
+        finish();
     }
 }

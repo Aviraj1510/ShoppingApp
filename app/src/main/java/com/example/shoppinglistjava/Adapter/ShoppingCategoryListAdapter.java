@@ -65,7 +65,7 @@ public class ShoppingCategoryListAdapter extends RecyclerView.Adapter<ShoppingCa
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textItemName, textItemQuantity, textItemRupee, textPerProductRupee;
+        TextView textItemName, textItemQuantity, textItemRupee, textPerProductRupee, textType;
         ImageView btDelete, btPlus, btMinus;
 
 
@@ -80,7 +80,7 @@ public class ShoppingCategoryListAdapter extends RecyclerView.Adapter<ShoppingCa
             btDelete =  itemView.findViewById(R.id.ivCDelete);
             btPlus = itemView.findViewById(R.id.ivCPlus);
             btMinus = itemView.findViewById(R.id.ivCMinus);
-
+            textType = itemView.findViewById(R.id.Ctype);
         }
 
         public void bind(final ShoppingCList shoppingCList, final OnItemClickListener listener) {
@@ -88,6 +88,7 @@ public class ShoppingCategoryListAdapter extends RecyclerView.Adapter<ShoppingCa
             textItemQuantity.setText(String.valueOf(shoppingCList.getCamount()));
             textItemRupee.setText(String.valueOf(shoppingCList.getCtotalrupees()));
             textPerProductRupee.setText(String.valueOf(shoppingCList.getCrupees()));
+            textType.setText(shoppingCList.getCproductType());
 
             btDelete.setOnClickListener(v -> listener.onDeleteClick(shoppingCList));
             btPlus.setOnClickListener(v -> listener.onPlusClick(shoppingCList));

@@ -88,9 +88,12 @@ public class ListsActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ListsActivity.this, MainActivity.class));
+        finish();
     }
 }

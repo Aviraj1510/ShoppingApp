@@ -3,6 +3,7 @@ package com.example.shoppinglistjava;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -38,6 +39,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 
@@ -50,7 +52,7 @@ public class ShoppingList extends AppCompatActivity {
     private SearchView searchView;
     private ImageButton imageButton;
     private Button saveBtn;
-
+    private static final int CREATE_FILE_REQUEST_CODE = 1;
 
 
     @Override
@@ -176,6 +178,47 @@ public class ShoppingList extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CREATE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                // Get the URI of the selected file
+                Uri uri = data.getData();
+
+                // Now save the bill to the selected file
+                try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+                    if (outputStream != null) {
+                        shoppingViewModel.getAllShoppingItems().observe(this, new Observer<List<ShoppingItem>>() {
+                            @Override
+                            public void onChanged(List<ShoppingItem> shoppingItems) {
+                                if (shoppingItems != null && !shoppingItems.isEmpty()) {
+                                    String billData = generateBill(shoppingItems);
+                                    try {
+                                        outputStream.write(billData.getBytes());
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    Toast.makeText(ShoppingList.this, "Bill saved to selected file", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(ShoppingList.this, "No shopping items to save", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ShoppingList.this, "Failed to save bill", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+
+
+
     private void saveShoppingListToFile() {
         shoppingViewModel.getAllShoppingItems().observe(this, new Observer<List<ShoppingItem>>() {
             @Override
@@ -183,15 +226,12 @@ public class ShoppingList extends AppCompatActivity {
                 if (shoppingItems != null && !shoppingItems.isEmpty()) {
                     String billData = generateBill(shoppingItems);
 
-                    // Save to file
-                    File file = new File(getExternalFilesDir(null), "shopping_bill.txt");
-                    try (FileOutputStream fos = new FileOutputStream(file)) {
-                        fos.write(billData.getBytes());
-                        Toast.makeText(ShoppingList.this, "Bill saved to " + file.getPath(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Toast.makeText(ShoppingList.this, "Failed to save bill", Toast.LENGTH_SHORT).show();
-                    }
+                    // Launch the file picker to let the user choose the location
+                    Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TITLE, "shopping_bill.txt");
+                    startActivityForResult(intent, CREATE_FILE_REQUEST_CODE);
                 } else {
                     Toast.makeText(ShoppingList.this, "No shopping items to save", Toast.LENGTH_SHORT).show();
                 }

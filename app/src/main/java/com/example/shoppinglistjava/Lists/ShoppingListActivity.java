@@ -107,6 +107,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String itemName = edtCListName.getText().toString();
                 String quantityStr = edtCListQuantity.getText().toString();
+                String productType = autoCompleteTextView.getText().toString().trim();
                 String rupeeStr = edtCListRupee.getText().toString();
 
                 // Input validation to avoid crashes
@@ -115,7 +116,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                     double itemRupee = Double.parseDouble(rupeeStr); // Use Double here
                     double totalRupee = itemQuantity * itemRupee;
                     // Create a new ShoppingItem with the categoryId
-                    ShoppingCList shoppingItem = new ShoppingCList(itemName, itemQuantity, itemRupee, "", totalRupee, categoryId);
+                    ShoppingCList shoppingItem = new ShoppingCList(itemName, itemQuantity, itemRupee, productType, totalRupee, categoryId);
                     shoppingCategoryItemViewModel.insert(shoppingItem);
 
                     // Clear input fields after adding

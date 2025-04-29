@@ -60,19 +60,10 @@ public class ListsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Category category) {
                 // Handle category item click, pass the categoryId to ShoppingListActivity
-                int categoryId = category.getCategoryId();
-
-                shoppingCategoryItemViewModel.getItemsByCategory(categoryId).observe(ListsActivity.this, new Observer<List<ShoppingCList>>() {
-                    @Override
-                    public void onChanged(List<ShoppingCList> items) {
-                        if (items != null && !items.isEmpty()) {
-                            saveCategoryItemsToFile(category.getCategoryName(), items);
-                            Toast.makeText(ListsActivity.this, "Items saved to file.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(ListsActivity.this, "No items found in this category.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                Intent intent = new Intent(ListsActivity.this, ShoppingListActivity.class);
+                intent.putExtra("categoryId", category.getCategoryId());
+                intent.putExtra("categoryName", category.getCategoryName());
+                startActivity(intent);
             }
 
             @Override

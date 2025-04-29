@@ -111,6 +111,7 @@ public class ListsActivity extends AppCompatActivity {
                             }
 
                             dataToSave.append("\nGrand Total: ₹").append(grandTotal);
+                            dataToSave.append("\nThank you for shopping with us! 🛍️\n");
                             // Save the content using system file picker
                             createFileAndSave(category.getCategoryName(), dataToSave.toString());
 

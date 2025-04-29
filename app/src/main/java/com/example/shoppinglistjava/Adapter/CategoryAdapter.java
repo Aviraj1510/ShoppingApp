@@ -33,6 +33,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public interface OnItemClickListener{
         void onItemClick(Category category);
         void deleteCategory(Category category);
+        void onSaveClick(Category category);
     }
 
 
@@ -62,6 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textCategory;
         ImageView btnDelete;
+        Button categorySave;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -69,6 +71,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             textCategory = itemView.findViewById(R.id.categoryName);
             btnDelete = itemView.findViewById(R.id.categoryDelete);
+            categorySave = itemView.findViewById(R.id.categorySave);
 
         }
 
@@ -81,6 +84,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 }
             });
             btnDelete.setOnClickListener(v -> listener.deleteCategory(item));
+            categorySave.setOnClickListener(v -> {
+                if (listener != null) {
+                    Log.d("CategoryAdapter", "Save clicked for category: " + item.getCategoryName());
+                    listener.onSaveClick(item);
+                }
+            });
         }
     }
 }

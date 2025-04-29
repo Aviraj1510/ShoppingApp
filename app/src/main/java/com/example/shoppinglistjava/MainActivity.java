@@ -2,6 +2,8 @@ package com.example.shoppinglistjava;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     private void openAddItemDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_item, null);
+
         builder.setView(dialogView);
 
         EditText etName = dialogView.findViewById(R.id.editTextName);
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show(); // Show dialog first before setting button click listener
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         buttonAdd.setOnClickListener(v -> {
             String name = etName.getText().toString().trim();

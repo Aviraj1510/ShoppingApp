@@ -20,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.shoppinglistjava.ListData.ShoppingItem;
+import com.example.shoppinglistjava.Lists.ListsActivity;
+import com.example.shoppinglistjava.Lists.ShoppingList;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

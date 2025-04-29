@@ -1,12 +1,10 @@
-package com.example.shoppinglistjava;
+package com.example.shoppinglistjava.Lists;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -28,10 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppinglistjava.Adapter.ShoppingListAdapter;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
+import com.example.shoppinglistjava.MainActivity;
+import com.example.shoppinglistjava.R;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;

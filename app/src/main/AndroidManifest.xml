@@ -15,16 +15,16 @@
         android:theme="@style/Theme.ShoppingListJava"
         tools:targetApi="31">
         <activity
-            android:name=".ShoppingListActivity"
+            android:name=".Lists.ShoppingListActivity"
             android:exported="false" />
         <activity
-            android:name=".ListsActivity"
+            android:name=".Lists.ListsActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".ShoppingList"
+            android:name=".Lists.ShoppingList"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"

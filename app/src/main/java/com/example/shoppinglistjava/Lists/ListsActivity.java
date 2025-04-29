@@ -1,4 +1,4 @@
-package com.example.shoppinglistjava;
+package com.example.shoppinglistjava.Lists;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoppinglistjava.Adapter.CategoryAdapter;
 import com.example.shoppinglistjava.ListData.Category;
+import com.example.shoppinglistjava.MainActivity;
+import com.example.shoppinglistjava.R;
 import com.example.shoppinglistjava.ViewModel.CategoryViewModel;
 
 import java.util.List;

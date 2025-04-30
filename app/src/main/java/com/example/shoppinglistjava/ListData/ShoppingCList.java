@@ -22,6 +22,8 @@ public class ShoppingCList {
     private double Ctotalrupees;
     private int categoryId;
     private int id;
+    public String userId;
+
 
     public ShoppingCList() {
     }
@@ -99,6 +101,14 @@ public class ShoppingCList {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
 

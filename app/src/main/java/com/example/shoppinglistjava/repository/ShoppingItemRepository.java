@@ -15,14 +15,17 @@ import java.util.concurrent.Executors;
 public class ShoppingItemRepository {
     private ShoppingCItemDao shoppingCItemDao;
     private ExecutorService executorService;
+    private final String userId;
 
-    public ShoppingItemRepository(Application application) {
+    public ShoppingItemRepository(Application application, String userId) {
+        this.userId = userId;
         ShoppingDatabase db = ShoppingDatabase.getInstance(application);
         shoppingCItemDao = db.shoppingCItemDao();
         executorService = Executors.newSingleThreadExecutor();
     }
 
     public void insert(final ShoppingCList shoppingCategoryItem) {
+        shoppingCategoryItem.setUserId(userId);
         executorService.execute(() -> shoppingCItemDao.insert(shoppingCategoryItem));
     }
 
@@ -35,6 +38,6 @@ public class ShoppingItemRepository {
     }
 
     public LiveData<List<ShoppingCList>> getItemsByCategory(int categoryId) {
-        return shoppingCItemDao.getItemsByCategoryId(categoryId);
+        return shoppingCItemDao.getItemsByCategoryId(categoryId, userId);
     }
 }

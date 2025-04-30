@@ -14,7 +14,7 @@ import com.example.shoppinglistjava.ListData.ShoppingItem;
 import java.util.Locale;
 
 
-@Database(entities = {ShoppingItem.class, Category.class, ShoppingCList.class}, version = 10)
+@Database(entities = {ShoppingItem.class, Category.class, ShoppingCList.class}, version = 11)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
 

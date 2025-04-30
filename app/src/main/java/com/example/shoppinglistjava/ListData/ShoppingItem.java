@@ -18,6 +18,7 @@ public class ShoppingItem {
     private String productType;
     private double totalrupees;
     private long categoryId;
+    private String userId;
 
     public ShoppingItem(String name, int amount, double rupees, String productType) {
         this.name = name;
@@ -91,5 +92,13 @@ public class ShoppingItem {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

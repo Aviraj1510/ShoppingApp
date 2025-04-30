@@ -10,6 +10,8 @@ public class Category {
     private int categoryId;
 
     private String categoryName;
+    public String userId;
+
 
     public Category(String categoryName) {
         this.categoryName = categoryName;
@@ -29,5 +31,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

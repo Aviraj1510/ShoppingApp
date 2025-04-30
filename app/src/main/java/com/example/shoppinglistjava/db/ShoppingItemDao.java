@@ -22,10 +22,12 @@ public interface ShoppingItemDao {
     @Delete
     void delete(ShoppingItem item);
 
-    @Query("SELECT * FROM shopping_items")
-    LiveData<List<ShoppingItem>> getAllShoppingItems();
+    @Query("SELECT * FROM shopping_items WHERE userId = :userId")
+    LiveData<List<ShoppingItem>> getAllShoppingItems(String userId);
 
-    @Query("SELECT * FROM shopping_items WHERE name LIKE :query")
-    LiveData<List<ShoppingItem>> searchItems(String query);
+
+    @Query("SELECT * FROM shopping_items WHERE name LIKE :query AND userId = :userId")
+    LiveData<List<ShoppingItem>> searchItems(String query, String userId);
+
 
 }

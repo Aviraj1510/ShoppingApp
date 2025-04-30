@@ -17,20 +17,22 @@ public class ShoppingRepository {
     private LiveData<List<ShoppingItem>> allShoppingItems;
     private ExecutorService executorService;
 
+    private final String userId;
 
-
-    public ShoppingRepository(Application application) {
+    public ShoppingRepository(Application application, String userId) {
         ShoppingDatabase database = ShoppingDatabase.getInstance(application);
         shoppingItemDao = database.shoppingItemDao();
-        allShoppingItems = shoppingItemDao.getAllShoppingItems();
+        this.userId = userId;
+        allShoppingItems = shoppingItemDao.getAllShoppingItems(userId);
         executorService = Executors.newSingleThreadExecutor();
     }
 
     public LiveData<List<ShoppingItem>> searchItems(String query) {
-        return shoppingItemDao.searchItems("%" + query + "%");
+        return shoppingItemDao.searchItems("%" + query + "%", userId);
     }
 
     public void insert(ShoppingItem item) {
+        item.setUserId(userId);
         executorService.execute(() -> shoppingItemDao.insert(item));
     }
     public LiveData<List<ShoppingItem>> getAllShoppingItems() {

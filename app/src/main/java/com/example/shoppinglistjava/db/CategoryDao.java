@@ -20,8 +20,9 @@ public interface CategoryDao {
     @Delete
     void delete(Category category);
 
-    @Query("SELECT * FROM list_type")
-    LiveData<List<Category>> getAllCategories();
+    @Query("SELECT * FROM list_type WHERE userId = :userId")
+    LiveData<List<Category>> getAllCategories(String userId);
+
 
 
 }

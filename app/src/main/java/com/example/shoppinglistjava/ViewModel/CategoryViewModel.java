@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.shoppinglistjava.ListData.Category;
 import com.example.shoppinglistjava.repository.CategoryRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -17,8 +19,14 @@ public class CategoryViewModel extends AndroidViewModel {
     // Constructor that takes Application as parameter
     public CategoryViewModel(Application application) {
         super(application); // Call the AndroidViewModel constructor
-        categoryRepository = new CategoryRepository(application);
-        allCategory = categoryRepository.getAllCategory();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            categoryRepository = new CategoryRepository(application, userId);
+            allCategory = categoryRepository.getAllCategory();
+        } else {
+            throw new IllegalStateException("User not logged in");
+        }
     }
 
     // Insert method

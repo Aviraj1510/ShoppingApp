@@ -24,6 +24,7 @@ public interface ShoppingCItemDao {
     @Update
     void update(ShoppingCList shoppingCList);
 
-    @Query("SELECT * FROM shopping_category_items WHERE categoryId = :categoryId")
-    LiveData<List<ShoppingCList>> getItemsByCategoryId(int categoryId);
+    @Query("SELECT * FROM shopping_category_items WHERE categoryId = :categoryId AND userId = :userId")
+    LiveData<List<ShoppingCList>> getItemsByCategoryId(int categoryId, String userId);
+
 }

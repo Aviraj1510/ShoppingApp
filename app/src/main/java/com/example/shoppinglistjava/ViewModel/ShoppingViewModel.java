@@ -10,6 +10,8 @@ import androidx.lifecycle.Transformations;
 
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.repository.ShoppingRepository;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -21,8 +23,14 @@ public class ShoppingViewModel extends AndroidViewModel {
 
     public ShoppingViewModel(@NonNull Application application) {
         super(application);
-        repository = new ShoppingRepository(application);
-        allShoppingItems = repository.getAllShoppingItems();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+            repository = new ShoppingRepository(application, userId);
+            allShoppingItems = repository.getAllShoppingItems();
+        } else {
+            throw new IllegalStateException("User not logged in");
+        }
     }
 
     public void insert(ShoppingItem item) {

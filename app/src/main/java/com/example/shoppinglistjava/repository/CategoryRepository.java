@@ -16,15 +16,17 @@ public class CategoryRepository {
     private CategoryDao categoryDao;
     private LiveData<List<Category>> allCategory;
     private ExecutorService executorService;
-
-    public CategoryRepository(Application application){
+    private final String userId;
+    public CategoryRepository(Application application, String userId){
         ShoppingDatabase shoppingDatabase = ShoppingDatabase.getInstance(application);
         categoryDao = shoppingDatabase.categoryDao();
-        allCategory = categoryDao.getAllCategories();
+        this.userId = userId;
+        allCategory = categoryDao.getAllCategories(userId);
         executorService = Executors.newSingleThreadExecutor();
 
     }
     public void insert(Category category){
+        category.setUserId(userId);
         executorService.execute(() -> categoryDao.insert(category));
     }
     public void delete(Category category){

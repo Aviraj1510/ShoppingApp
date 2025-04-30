@@ -122,7 +122,6 @@ public class ListsActivity extends AppCompatActivity {
         categoryViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
                 .get(CategoryViewModel.class);
-
         categoryViewModel.getAllCategory().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {

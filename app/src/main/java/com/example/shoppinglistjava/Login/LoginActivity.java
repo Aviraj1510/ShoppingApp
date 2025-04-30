@@ -7,9 +7,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.shoppinglistjava.MainActivity;
 import com.example.shoppinglistjava.R;
+import com.example.shoppinglistjava.ViewModel.CategoryViewModel;
+import com.example.shoppinglistjava.ViewModel.ShoppingCategoryItemViewModel;
+import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -74,16 +78,32 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Toast.makeText(this, "Signed in as: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                         // Navigate to HomeActivity
-                        startActivity(new Intent(this, MainActivity.class));
-                        finish();
+                        userDataSyncWithFirebaseRealtimeDatabase();
                     } else {
                         Toast.makeText(this, "Firebase Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void saveUserInFirebaseRealtimeDatabase(){
+    private void userDataSyncWithFirebaseRealtimeDatabase(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
 
+            // Sync all data
+            ShoppingViewModel shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
+            shoppingViewModel.syncFromFirebase();
+
+            CategoryViewModel categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
+            categoryViewModel.syncFromFirebase();
+
+            ShoppingCategoryItemViewModel categoryItemViewModel = new ViewModelProvider(this).get(ShoppingCategoryItemViewModel.class);
+            categoryItemViewModel.syncFromFirebase();
+
+            // Then start main screen
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
 

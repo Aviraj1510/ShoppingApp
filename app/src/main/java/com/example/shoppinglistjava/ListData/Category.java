@@ -12,6 +12,8 @@ public class Category {
     private String categoryName;
     public String userId;
 
+    public Category() {
+    }
 
     public Category(String categoryName) {
         this.categoryName = categoryName;

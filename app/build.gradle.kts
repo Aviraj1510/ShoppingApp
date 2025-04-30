@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)
     implementation(libs.googleid)
+    implementation(libs.firebase.database)
     annotationProcessor ("androidx.room:room-compiler:2.7.1")
 
     // ViewModel & LiveData

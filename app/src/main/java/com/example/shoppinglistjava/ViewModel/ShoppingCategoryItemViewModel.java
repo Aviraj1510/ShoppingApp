@@ -43,4 +43,8 @@ public class ShoppingCategoryItemViewModel extends AndroidViewModel {
     public LiveData<List<ShoppingCList>> getItemsByCategory(int categoryId) {
         return shoppingItemRepository.getItemsByCategory(categoryId);
     }
+    public void syncFromFirebase() {
+        shoppingItemRepository.syncFromFirebase();
+    }
+
 }

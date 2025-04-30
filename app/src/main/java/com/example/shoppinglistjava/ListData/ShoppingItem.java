@@ -20,6 +20,8 @@ public class ShoppingItem {
     private long categoryId;
     private String userId;
 
+    public ShoppingItem() {}
+
     public ShoppingItem(String name, int amount, double rupees, String productType) {
         this.name = name;
         this.amount = amount;

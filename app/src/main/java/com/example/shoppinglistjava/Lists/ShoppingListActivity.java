@@ -94,7 +94,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         shoppingCategoryItemViewModel = new ViewModelProvider(this,
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()))
                 .get(ShoppingCategoryItemViewModel.class);
-
         shoppingCategoryItemViewModel.getItemsByCategory(categoryId).observe(this, new Observer<List<ShoppingCList>>() {
             @Override
             public void onChanged(List<ShoppingCList> shoppingItems) {

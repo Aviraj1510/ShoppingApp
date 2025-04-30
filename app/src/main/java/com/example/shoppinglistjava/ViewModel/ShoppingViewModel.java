@@ -56,4 +56,8 @@ public class ShoppingViewModel extends AndroidViewModel {
     public LiveData<List<ShoppingItem>> searchItems(String query) {
         return repository.searchItems(query);
     }
+
+    public void syncFromFirebase() {
+        repository.syncFromFirebase();
+    }
 }

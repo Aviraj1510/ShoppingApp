@@ -62,6 +62,7 @@ public class ShoppingList extends AppCompatActivity {
         imageButton = findViewById(R.id.btnBack);
         saveBtn = findViewById(R.id.saveList);
 
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,13 +145,8 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
 
-
-
-
-
         // Initialize ViewModel
         shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
-
         // Observe the list of shopping items (LiveData)
         shoppingViewModel.getAllShoppingItems().observe(this, new Observer<List<ShoppingItem>>() {
             @Override

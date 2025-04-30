@@ -42,4 +42,7 @@ public class CategoryViewModel extends AndroidViewModel {
     public LiveData<List<Category>> getAllCategory() {
         return allCategory;
     }
+    public void syncFromFirebase() {
+        categoryRepository.syncFromFirebase();
+    }
 }

@@ -11,15 +11,23 @@
     >
 
     <ImageView
+        android:id="@+id/btnSettings"
+        android:layout_width="70dp"
+        android:layout_height="67dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_setting_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
         android:src="@drawable/grocery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
 
     <TextView
         android:id="@+id/textView"

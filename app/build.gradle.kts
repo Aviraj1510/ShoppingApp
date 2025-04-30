@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
     namespace = "com.example.shoppinglistjava"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.shoppinglistjava"
@@ -34,12 +35,18 @@ android {
 dependencies {
 
     // Room Database
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-runtime:2.7.1")
+    implementation(libs.firebase.auth)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    annotationProcessor ("androidx.room:room-compiler:2.7.1")
 
     // ViewModel & LiveData
-    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.8.6")
-    implementation ("androidx.lifecycle:lifecycle-livedata:2.8.6")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel:2.8.7")
+    implementation ("androidx.lifecycle:lifecycle-livedata:2.8.7")
+
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)

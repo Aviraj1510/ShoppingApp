@@ -21,16 +21,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.shoppinglistjava.Activity.SettingsActivity;
 import com.example.shoppinglistjava.ListData.ShoppingItem;
 import com.example.shoppinglistjava.Lists.ListsActivity;
 import com.example.shoppinglistjava.Lists.ShoppingList;
+import com.example.shoppinglistjava.Login.LoginActivity;
 import com.example.shoppinglistjava.ViewModel.ShoppingViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private ShoppingViewModel shoppingViewModel;
-    private ImageView cartSlide, addItemIcon;
+    private ImageView cartSlide, addItemIcon, btnSettings;
     private CardView cardAdd;
     private BottomNavigationView bottomNavigationView;
 
@@ -43,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         addItemIcon = findViewById(R.id.addItemIcon);
         cardAdd = findViewById(R.id.cardAdd);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        btnSettings = findViewById(R.id.btnSettings);
+
+
+        btnSettings.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            finish();
+        });
+
         Animation clickAnimation = AnimationUtils.loadAnimation(this, R.anim.click_animation);
         shoppingViewModel = new ViewModelProvider(this).get(ShoppingViewModel.class);
 
